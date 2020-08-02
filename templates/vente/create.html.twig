@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+
+{% block body %}
+    <h1>Création d'une annonce</h1>
+
+    {{form_start(formArticle)}}
+
+    {{form_row(formArticle.title, {'attr': {'placeholder' : 'Titre'}})}}
+    {{form_row(formArticle.description, {'attr': {'placeholder' : 'Description'}})}}
+    {{form_row(formArticle.image, {'attr': {'placeholder' : 'URL image'}})}}
+    {{form_row(formArticle.price, {'attr': {'placeholder' : 'Prix'}})}}
+    {{form_row(formArticle.categorie, {'attr': {'placeholder' : 'Catégorie'}})}}
+
+   
+    <button type="submit" name="update_button" value="Update" class="btn btn-success">
+    {% if editmode %}
+    Modifier l'annonce
+    {% else %}
+    Ajouter l'annonce
+    {% endif %}
+    </button>
+
+    {% if editmode %}
+    <button type="submit" name="delete_button" value="Delete" class="btn btn-danger">
+        Supprimer l'annonce
+    </button>
+    {% endif %}
+
+    
+   
+    
+    
+
+    {{form_end(formArticle)}}
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<article>
+        
+        <div class="card mb-3" style="margin-top: 20px;">
+            <h3 class="card-header">{{article.getTitle}}</h3>
+            <div class="card-body">       
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr class="table-active">
+                                <th scope="col">Ecrit le {{article.getDate | date('d/m/y à H:i')}}  <em>par {{article.getAuthor.getUsername}}</em></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"><h5>{{article.getPrice}} €</h5></th>
+                            </tr>
+                        </tbody>
+                    </table>      
+            </div>
+            </br>
+            <div>
+            <img style="height: 400px; width: 640px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
+            </div>
+            <div class="card-body">
+                <p style="font-weight: bold;">Description : </p>
+                <p class="card-text">{{article.getDescription | raw}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><text class="text-warning" style="font-weight: bold;">Catégorie : {{article.getCategorie.getTitle}}</text></li>
+                <li class="list-group-item" style="font-weight: bolder;">
+                Contacts: 
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><text class="text-info" style="font-weight: bold;">mail: {{article.getAuthor.getEmail}}</text></li>
+                </ul>
+                </li>
+                
+                
+            </ul>
+            {% if username == article.getAuthor.getUsername %}
+            <div class="card-body">
+                
+                <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="card-link"> Modifier </a>
+                
+                <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
+                
+                
+            </div>
+            {% endif %}
+        </div>
+
+</article>
+
+<div class="commentaire" style="margin-bottom: 20px;">
+
+    <h4>{{ article.comments | length }} commentaires</h4>
+    {% for comment in article.getComments %}
+        <div class="card border-light mb-3" style="max-width: 60rem;">
+            <div class="card-header">
+                {{comment.getDate | date('d/m/y à H:i')}} par {{comment.getAuthor}} 
+                {% if comment.getAuthor == article.getAuthor.getUsername %}
+                    <div class="text-info"> Vendeur ✅</div>
+                {% endif %}
+                 
+            </div>
+            <div class="card-body">
+                <h4 class="card-title"></h4>
+                <p class="card-text">{{comment.content | raw}}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </br>
+    {% if app.user %}
+        <h4>Poser une question à propos de l'article</h4>
+        {{ form_start(commentForm)}}
+        {{ form_row(commentForm.content, {'attr': {'placeholder' : "votre commentaire"}})}}
+        <button type="submit" class="btn btn-success">Commenter</button>
+        {{ form_end(commentForm)}}
+    {% else %}
+        <h4>Connectez-vous pour poser une question à propos de l'article</h4>
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}

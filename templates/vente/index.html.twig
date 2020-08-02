@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Controller!{% endblock %}
+
+{% block body %}
+
+<div class="tri" style="margin-top: 15px;">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-primary">Carégorie</button>
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+        {% for categorie in categories %}
+            <a class="dropdown-item" href="{{ path('ventes_categorie',{'cat':categorie.title,'tri': tri,'sens':sens}) }}">{{categorie.title}}</a>
+        {% endfor %}
+        
+        
+        </div>
+    </div>
+    </div>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-primary">Trier par {{tri}}</button>
+    <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+        <a class="dropdown-item" href="{{ path('ventes_categorie', {'cat': cat,'tri': 'date','sens':'DESC'}) }}">Du + au - récent</a>
+        <a class="dropdown-item" href="{{ path('ventes_categorie', {'cat': cat,'tri': 'date','sens':'ASC'}) }}">Du - au + récent</a>
+        <a class="dropdown-item" href="{{ path('ventes_categorie', {'cat': cat,'tri': 'price','sens':'DESC'}) }}">Du + au - cher</a>
+        <a class="dropdown-item" href="{{ path('ventes_categorie', {'cat': cat,'tri': 'price','sens':'ASC'}) }}">Du - au + cher</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<section class="article">
+    
+
+
+
+    {% set i = 2 %}
+    
+
+    {% for article in articles %}
+        {% if i == 2 %}
+            <div class="row" style="margin-top: 20px;">
+            {% set i = 0 %}
+        {% endif %}
+
+       
+        <div class="col-lg-6">
+            <div class="card mb-3">
+                <h3 class="card-header">{{article.getTitle}}</h3>
+                <div class="card-body">
+                    <h5 class="card-title">Ecrit le {{article.getDate | date('d/m/y')}}</h5>
+                    <h6 class="card-subtitle text-muted">par {{article.getAuthor.getUsername}}</h6>
+                </div>
+                <img style="height: 300px; width: 480px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
+                <div class="card-body">
+                    <p class="card-text">{{article.getDescription | length > 250 ? article.getDescription|slice(0, 250) ~ '...' : article.getDescription}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h3 class="display-6">{{article.getPrice | raw}}€</h3></li>
+                    <li class="list-group-item"><text class="text-warning" style="font-weight: bold;">Catégorie : {{article.getCategorie.getTitle}}</text></li>
+                    
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('ventes_show', {'id': article.id}) }}" class="btn btn-primary btn-lg">Consulter</a>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+        {% set i = i + 1 %}
+        {% if i == 2 %}  
+            </div>
+        {% endif %}
+    
+    {% endfor %}
+    
+    </div>
+    
+    
+</section>
+
+{% endblock %}
