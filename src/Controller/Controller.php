@@ -26,7 +26,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class Controller extends AbstractController
 {
     /**
-     * @Route("/ventes", name="ventes")
+     * @Route("/ventes", name="home")
+     * @Route("/", name="ventes")
      * @Route("/ventes/tri/{cat}/{tri}/{sens}", name="ventes_categorie")
      */
     public function index(ArticleRepository $repo, CategorieRepository $repocat, $tri = null, $sens = null, $cat = 'all', Request $request)
@@ -69,9 +70,7 @@ class Controller extends AbstractController
 
     }
 
-    /**
-     * @Route("/", name="home")
-    */
+    
     public function home()
     {
         return $this->render('vente/home.html.twig');
@@ -97,6 +96,7 @@ class Controller extends AbstractController
 
     /**
      * @Route("/ventes/new", name="ventes_create")
+     * 
      * @Route("/ventes/{id}/edit", name="ventes_edit")
     */
     public function form(Article $article = null, Request $request, EntityManagerInterface $manager)

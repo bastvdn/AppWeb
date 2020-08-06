@@ -55,7 +55,7 @@
                     <h5 class="card-title">Ecrit le {{article.getDate | date('d/m/y')}}</h5>
                     <h6 class="card-subtitle text-muted">par {{article.getAuthor.getUsername}}</h6>
                 </div>
-                <img style="height: 300px; width: 480px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
+                <img style="height: max-height; width: max-width;max-width: 520px;max-height: 300px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
                 <div class="card-body">
                     <p class="card-text">{{article.getDescription | length > 250 ? article.getDescription|slice(0, 250) ~ '...' : article.getDescription}}</p>
                 </div>
