@@ -14,7 +14,7 @@
                                 <th scope="col">Ecrit le {{article.getDate | date('d/m/y à H:i')}}  <em>par {{article.getAuthor.getUsername}}</em></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
-                                <th scope="col"><h5>{{article.getPrice}} €</h5></th>
+                                <th scope="col"><h5>{{article.getPrice | raw}} €</h5></th>
                             </tr>
                         </tbody>
                     </table>      
