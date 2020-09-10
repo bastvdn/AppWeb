@@ -4,7 +4,22 @@
 <section class="article">
     
     {% set i = 2 %}
-    
+    <div class="container" style="margin-top: 20px;">
+        <div class="card" style="margin-top: 20px;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.username}}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                
+            </div>
+        </div>
+    </div>
 
     {% for article in articles %}
         {% if i == 2 %}

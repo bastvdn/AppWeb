@@ -4,52 +4,65 @@
 
 
 <article>
-        
-        <div class="card mb-3" style="margin-top: 20px;">
-            <h3 class="card-header">{{article.getTitle}}</h3>
-            <div class="card-body">       
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr class="table-active">
-                                <th scope="col">Ecrit le {{article.getDate | date('d/m/y à H:i')}}  <em>par {{article.getAuthor.getUsername}}</em></th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <th scope="col"><h5>{{article.getPrice | raw}} €</h5></th>
-                            </tr>
-                        </tbody>
-                    </table>      
-            </div>
-            </br>
-            <div width="640px" height="400px">
-            <img style="height: max-height; width: max-width;max-width: 640px;max-height: 400px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
-            </div>
-            <div class="card-body">
-                <p style="font-weight: bold;">Description : </p>
-                <p class="card-text">{{article.getDescription | raw}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><text class="text-warning" style="font-weight: bold;">Catégorie : {{article.getCategorie.getTitle}}</text></li>
-                <li class="list-group-item" style="font-weight: bolder;">
-                Contacts: 
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><text class="text-info" style="font-weight: bold;">mail: {{article.getAuthor.getEmail}}</text></li>
-                </ul>
-                </li>
-                
-                
-            </ul>
-            {% if username == article.getAuthor.getUsername %}
-            <div class="card-body">
-                
-                <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="card-link"> Modifier </a>
-                
-                <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
-                
-                
-            </div>
-            {% endif %}
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="card mb-3 col-sm-9" style="margin-top: 20px;">
+                    <h3 class="card-header">{{article.getTitle}}</h3>
+                    <div class="card-body">       
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th scope="col">Ecrit le {{article.getDate | date('d/m/y à H:i')}}  <em>par {{article.getAuthor.getUsername}}</em></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"><h5>{{article.getPrice}} €</h5></th>
+                                    </tr>
+                                </tbody>
+                            </table>      
+                    </div>
+                    </br>
+                    <div width="640px" height="400px">
+                    <img style="height: max-height; width: max-width;max-width: 640px;max-height: 400px; display: block; margin-left: auto; margin-right: auto;" src="{{ article.image }}" alt="Card image">
+                    </div>
+                    <div class="card-body">
+                        <p style="font-weight: bold;">Description : </p>
+                        <p class="card-text">{{article.getDescription | raw}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><text class="text-warning" style="font-weight: bold;">Catégorie : {{article.getCategorie.getTitle}}</text></li>
+                        <li class="list-group-item" style="font-weight: bolder;">
+                        Contacts: 
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><text class="text-info" style="font-weight: bold;">mail: {{article.getAuthor.getEmail}}</text></li>
+                        </ul>
+                        </li>
+                        
+                        
+                    </ul>
+                    {% if username == article.getAuthor.getUsername %}
+                    <div class="card-body">
+                        
+                        <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="card-link"> Modifier </a>
+                        
+                        <a href="{{ path('ventes_edit', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
+                        
+                        
+                    </div>
+                    {% endif %}
+                </div>
 
+                <div class="col-sm-3" style="margin-top: 20px;">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Par {{article.getAuthor.getUsername}}</h5>
+                            <p class="card-text"> {{article.getAuthor.getArticles | length }} Annonces en ligne</p>
+                            <a href="{{ path('user_articles', {'username': article.getAuthor.getUsername}) }}" class="btn btn-primary">afficher les annonces</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </article>
 
 <div class="commentaire" style="margin-bottom: 20px;">

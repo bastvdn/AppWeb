@@ -3,7 +3,12 @@
 
 
 {% block body %}
-    <h1>Création d'une annonce</h1>
+    {% if editmode %}
+        <h1>Modification d'une annonce</h1>
+    {% else %}
+        <h1>Création d'une annonce</h1>
+    {% endif %}
+    
 
     {{form_start(formArticle)}}
 

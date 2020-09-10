@@ -10,7 +10,8 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+            <div class="container">
             <a class="navbar-brand" href="{{ path('home')}}">ebaille</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,6 +22,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('ventes')}}">Ventes <span class="sr-only">(current)</span></a>
                     </li>
+                    
                    
                     {% if app.user %}
                     <li class="nav-item">
@@ -48,6 +50,7 @@
                     
                 </ul>
                 {% if app.user %}
+                
 
                 <span class="navbar-text">
                         Bienvenue {{app.user.getUsername}}
@@ -69,7 +72,7 @@
                 {% endif %}
                 
             </div>
-            
+            </div>
         </nav>
         
         <div class="container">
